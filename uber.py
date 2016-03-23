@@ -21,10 +21,9 @@ while flag:
 	try:
 		url = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/userReviewsRow?cc="+cc+"&id=368677368&displayable-kind=11&startIndex="+(str)(start)+"&endIndex="+(str)(end)+"&sort=0&appVersion=all" 
 		r = requests.get(url,headers=headers)
-		soup = BeautifulSoup(r.content, "lxml")
+		soup = BeautifulSoup(r.content, "html5lib")
 		#print (soup)
-		tmp = str(soup)
-		jsonResponse = json.loads(tmp[15:-18])
+		jsonResponse = json.loads(str(soup)[25:-14])
 		jsonData = jsonResponse["userReviewList"]
 		#print (len(jsonData))
 		#if (end)==1500:
