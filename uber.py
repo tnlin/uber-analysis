@@ -7,18 +7,19 @@ headers = {
 }
 
 #sqlite connect
-conn = sqlite3.connect('test.sqlite')
+conn = sqlite3.connect('uber.sqlite')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS Uber
   (rating integer, name text, userReviewId text, title text, body text, date text, 
-  	voteSum integer, voteCount integer, voteUrl text, viewUsersUserReviewsUrl text, customerType text)''')
+  	voteSum integer, voteCount integer, voteUrl text, viewUsersUserReviewsUrl text, customerType text, cc text)''')
 #~10279
+cc="us"
 flag=True
-start=13981
-end=14000
+start=0
+end=100
 while flag:
 	try:
-		url = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/userReviewsRow?cc=cn&id=368677368&displayable-kind=11&startIndex="+(str)(start)+"&endIndex="+(str)(end)+"&sort=0&appVersion=all" 
+		url = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/userReviewsRow?cc="+cc+"&id=368677368&displayable-kind=11&startIndex="+(str)(start)+"&endIndex="+(str)(end)+"&sort=0&appVersion=all" 
 		r = requests.get(url,headers=headers)
 		soup = BeautifulSoup(r.content, "lxml")
 		#print (soup)
@@ -32,12 +33,12 @@ while flag:
 		for key,item in enumerate(jsonData):
 			print (start+key+1,"|",item.get("rating"),item.get("name"),item.get("title"))
 			payloads = [item.get("rating"),item.get("name"),item.get("userReviewId"),item.get("title"),item.get("body"),item.get("date"),\
-						item.get("voteSum"),item.get("voteCount"),item.get("voteUrl"),item.get("viewUsersUserReviewsUrl"),item.get("customerType")]
+						item.get("voteSum"),item.get("voteCount"),item.get("voteUrl"),item.get("viewUsersUserReviewsUrl"),item.get("customerType"),cc]
 			c.execute('INSERT INTO Uber VALUES (' + ','.join("?" * len(payloads)) + ') ' , payloads)
 			conn.commit()	
 		start += 100
 		end += 100
-		time.sleep(2)
+		time.sleep(1)
 	except Exception as e:
   		print (e,",sleep 10s",end="")
   		time.sleep(10)
