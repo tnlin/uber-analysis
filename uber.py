@@ -13,17 +13,19 @@ c.execute('''CREATE TABLE IF NOT EXISTS Uber
   (rating integer, name text, userReviewId text, title text, body text, date text, 
   	voteSum integer, voteCount integer, voteUrl text, viewUsersUserReviewsUrl text, customerType text, cc text)''')
 #~10279
+#cc=["cn","tw","us"]
 cc="us"
 flag=True
-start=0
-end=100
+start=5300
+end=5400
 while flag:
 	try:
 		url = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/userReviewsRow?cc="+cc+"&id=368677368&displayable-kind=11&startIndex="+(str)(start)+"&endIndex="+(str)(end)+"&sort=0&appVersion=all" 
 		r = requests.get(url,headers=headers)
-		soup = BeautifulSoup(r.content, "html5lib")
+		content = bytes(r.text.replace('<','') , encoding = "utf8")
+		soup = BeautifulSoup(content, "html5lib")
 		#print (soup)
-		jsonResponse = json.loads(str(soup)[25:-14])
+		jsonResponse = json.loads(soup.text)
 		jsonData = jsonResponse["userReviewList"]
 		#print (len(jsonData))
 		#if (end)==1500:
@@ -41,8 +43,6 @@ while flag:
 	except Exception as e:
   		print (e,",sleep 10s",end="")
   		time.sleep(10)
-
-#print (json.dumps(data, indent=4,ensure_ascii=False))#json.dump default use ascii
 
 '''
        {

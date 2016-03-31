@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 cc="us"
-start=0
-end=50
+start=5350
+end=5400
 url = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/userReviewsRow?cc="+cc+"&id=368677368&displayable-kind=11&startIndex="+(str)(start)+"&endIndex="+(str)(end)+"&sort=0&appVersion=all"
 headers = {
     'User-Agent': 'iTunes/11.0 (Windows; Microsoft Windows 7 Business Edition Service Pack 1 (Build 7601)) AppleWebKit/536.27.1',
@@ -11,8 +11,10 @@ headers = {
 
 f = open('test.html', 'w')  
 r = requests.get(url,headers=headers)
-soup = BeautifulSoup(r.content, "html5lib")
-#print (r.text)
-print (soup)
-f.write(str(soup)[25:-14])
+content = bytes(r.text.replace('<',''), encoding = "utf8")
+#print (c1)
+soup = BeautifulSoup( content , "html5lib")
+print (soup.text)
+f.write(soup.text)
 f.close()
+#print (json.dumps(data, indent=4,ensure_ascii=False))#json.dump default use ascii
