@@ -14,7 +14,7 @@ c.execute('select rating,body from Uber WHERE cc="cn"')
 all_rows = c.fetchall()
 
 #Set big dictionary
-jieba.set_dictionary('dict.txt.big')
+jieba.set_dictionary('util/dict.txt.big')
 
 arr = count(all_rows)
 content=["","","","",""]
