@@ -2,7 +2,9 @@
 
 * Environment: python3
 
-* Library used: request,BeautifulSoup, following the command to install:
+* Library: request,BeautifulSoup
+
+follow the command to install libraries:
 > pip3 install request BeautifulSoup4
 
 Warning: This is a fun project with very dirty code(actually, this repo is espicially open for my friend) 
