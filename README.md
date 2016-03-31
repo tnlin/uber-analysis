@@ -1,6 +1,7 @@
 #Uber-analysis
 
-> Warning: This is a fun project with very dirty code(actually, this repo is espicially open for my friend), feel free to give any comment
+> Warning: This is a fun project with very dirty code(actually, this repo is espicially open for my friend)
+> feel free to give any comment, PR
 
 ##uber.py
 
