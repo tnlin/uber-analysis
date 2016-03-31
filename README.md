@@ -1,5 +1,10 @@
 #Uber-analysis
 
+* Environment: python3
+
+* Library used: request,BeautifulSoup, following the command to install:
+> pip3 install request BeautifulSoup4
+
 Warning: This is a fun project with very dirty code(actually, this repo is espicially open for my friend) 
 
 feel free to give any comment,PR
